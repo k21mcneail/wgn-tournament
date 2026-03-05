@@ -294,9 +294,9 @@ header { position:relative; z-index:10; padding:32px 32px 28px; border-bottom:1p
     <div class="view-card">
       <div class="view-tabs">
         <button class="view-tab active" onclick="setView('home')" id="tab-home">🏠 Home</button>
-        <button class="view-tab" onclick="setView('divisions')" id="tab-divisions">📂 Divisions</button>
-        <button class="view-tab" onclick="setView('standings')" id="tab-standings">🏆 Standings</button>
-        <button class="view-tab" onclick="setView('bracket')" id="tab-bracket">🏀 Bracket</button>
+        <button class="view-tab" onclick="setView('divisions')" id="tab-divisions" style="display:none;">📂 Divisions</button>
+        <button class="view-tab" onclick="setView('standings')" id="tab-standings" style="display:none;">🏆 Standings</button>
+        <button class="view-tab" onclick="setView('bracket')" id="tab-bracket" style="display:none;">🏀 Bracket</button>
         <button class="view-tab" onclick="setView('schedule')" id="tab-schedule">📋 Schedule</button>
       </div>
       <div class="view-panel active" id="panel-home"><div id="homePanel"></div></div>
@@ -443,36 +443,62 @@ function defaultDiv(id,label) {
 }
 
 let tournamentData = {
-  lastUpdated: null,
-  globalSchedule: {
-    days: [
-      {label:"Sat · Mar 8",startTime:"09:00",slotCount:4,grid:{"0_0":"5gg_pool_0","1_1":"5gg_pool_1","2_2":"5gg_pool_2","3_2":"5gg_semi_0"}}
+  lastUpdated:"Thu, Mar 5, 6:21 AM",
+  globalSchedule:{
+    days:[
+      {label:"Sat · Mar 7",startTime:"09:00",slotCount:7,grid:{"0_0":"7gb_pool_1","0_1":"4gb_pool_0","0_2":"","1_0":"7gb_pool_5","1_1":"4gb_pool_1","1_2":"","2_0":"6gg_pool_0","2_1":"7gb_pool_0","2_2":"","3_0":"5gg_pool_2","3_1":"4gb_pool_2","3_2":"","4_0":"6gg_pool_2","4_1":"7gb_pool_4","4_2":"","5_0":"5gg_pool_1","5_1":"6gg_pool_1","5_2":"","6_0":"5gg_pool_0","6_1":"","6_2":""}},
+      {label:"Sun Mar 8",startTime:"12:00",slotCount:5,grid:{"0_0":"7gb_semi_0","0_1":"7gb_semi_1","0_2":"","1_0":"6gg_semi_0","1_1":"5gg_semi_0","1_2":"","2_0":"7gb_champ","2_1":"4gb_semi_0","2_2":"","3_0":"6gg_champ","3_1":"5gg_champ","3_2":"","4_0":"4gb_champ","4_1":"","4_2":""}}
     ],
-    games: []
+    games:[]
   },
-  divisions: [
+  divisions:[
     {
-      id:"5gg", label:"5th Grade Girls",
+      id:"5gg",label:"5th Grade Girls",
       teams:["IGN","Dying Breed","Apex"],
       poolGames:[
-        {t1:"IGN",t2:"Dying Breed",score1:26,score2:12,selected:true},
-        {t1:"IGN",t2:"Apex",score1:26,score2:14,selected:true},
-        {t1:"Dying Breed",t2:"Apex",score1:22,score2:31,selected:true}
+        {t1:"IGN",t2:"Dying Breed",score1:0,score2:0,selected:true},
+        {t1:"IGN",t2:"Apex",score1:0,score2:0,selected:true},
+        {t1:"Dying Breed",t2:"Apex",score1:0,score2:0,selected:true}
       ],
-      standings:[
-        {team:"IGN",w:2,l:0,pf:52,pa:26},
-        {team:"Dying Breed",w:1,l:1,pf:34,pa:57},
-        {team:"Apex",w:0,l:2,pf:45,pa:48}
-      ],
-      bracket:{
-        semis:[{t1:"Dying Breed",t2:"Apex",score1:"",score2:"",winner:0}],
-        final:{t1:"IGN",t2:"TBD",score1:"",score2:"",winner:0},
-        champion:"TBD"
-      }
+      standings:[{team:"IGN",w:0,l:0,pf:0,pa:0},{team:"Apex",w:0,l:0,pf:0,pa:0},{team:"Dying Breed",w:0,l:0,pf:0,pa:0}],
+      bracket:{semis:[{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0}],final:{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"}
     },
-    { id:"6gg",label:"6th Grade Girls",teams:["Team 1","Team 2","Team 3"],poolGames:[],standings:[{team:"Team 1",w:0,l:0,pf:0,pa:0},{team:"Team 2",w:0,l:0,pf:0,pa:0},{team:"Team 3",w:0,l:0,pf:0,pa:0}],bracket:{semis:[{t1:"Team 2",t2:"Team 3",score1:"",score2:"",winner:0}],final:{t1:"Team 1",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"} },
-    { id:"4gb",label:"4th Grade Boys",teams:["Team A","Team B","Team C"],poolGames:[],standings:[{team:"Team A",w:0,l:0,pf:0,pa:0},{team:"Team B",w:0,l:0,pf:0,pa:0},{team:"Team C",w:0,l:0,pf:0,pa:0}],bracket:{semis:[{t1:"Team B",t2:"Team C",score1:"",score2:"",winner:0}],final:{t1:"Team A",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"} },
-    { id:"7gb",label:"7th Grade Boys",teams:["Team W","Team X","Team Y","Team Z"],poolGames:[],standings:[{team:"Team W",w:0,l:0,pf:0,pa:0},{team:"Team X",w:0,l:0,pf:0,pa:0},{team:"Team Y",w:0,l:0,pf:0,pa:0},{team:"Team Z",w:0,l:0,pf:0,pa:0}],bracket:{semis:[{t1:"Team W",t2:"Team Z",score1:"",score2:"",winner:0},{t1:"Team X",t2:"Team Y",score1:"",score2:"",winner:0}],final:{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"} }
+    {
+      id:"6gg",label:"6th Grade Girls",
+      teams:["Outlaws","Dying Breed","Fireballers"],
+      poolGames:[
+        {t1:"Outlaws",t2:"Dying Breed",score1:null,score2:null,selected:true},
+        {t1:"Outlaws",t2:"Fireballers",score1:null,score2:null,selected:true},
+        {t1:"Dying Breed",t2:"Fireballers",score1:null,score2:null,selected:true}
+      ],
+      standings:[{team:"Outlaws",w:0,l:0,pf:0,pa:0},{team:"Dying Breed",w:0,l:0,pf:0,pa:0},{team:"Fireballers",w:0,l:0,pf:0,pa:0}],
+      bracket:{semis:[{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0}],final:{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"}
+    },
+    {
+      id:"4gb",label:"4th Grade Boys",
+      teams:["Takeover","Rockets","Hype"],
+      poolGames:[
+        {t1:"Takeover",t2:"Rockets",score1:null,score2:null,selected:true},
+        {t1:"Takeover",t2:"Hype",score1:null,score2:null,selected:true},
+        {t1:"Rockets",t2:"Hype",score1:null,score2:null,selected:true}
+      ],
+      standings:[{team:"Takeover",w:0,l:0,pf:0,pa:0},{team:"Rockets",w:0,l:0,pf:0,pa:0},{team:"Hype",w:0,l:0,pf:0,pa:0}],
+      bracket:{semis:[{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0}],final:{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"}
+    },
+    {
+      id:"7gb",label:"7th Grade Boys",
+      teams:["IGN Lex","IGN Logan","Bears","All Red"],
+      poolGames:[
+        {t1:"IGN Lex",t2:"IGN Logan",score1:null,score2:null,selected:true},
+        {t1:"IGN Lex",t2:"Bears",score1:null,score2:null,selected:true},
+        {t1:"IGN Lex",t2:"All Red",score1:null,score2:null,selected:false},
+        {t1:"IGN Logan",t2:"Bears",score1:null,score2:null,selected:false},
+        {t1:"IGN Logan",t2:"All Red",score1:null,score2:null,selected:true},
+        {t1:"Bears",t2:"All Red",score1:null,score2:null,selected:true}
+      ],
+      standings:[{team:"IGN Lex",w:0,l:0,pf:0,pa:0},{team:"IGN Logan",w:0,l:0,pf:0,pa:0},{team:"Bears",w:0,l:0,pf:0,pa:0},{team:"All Red",w:0,l:0,pf:0,pa:0}],
+      bracket:{semis:[{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0}],final:{t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0},champion:"TBD"}
+    }
   ]
 };
 
