@@ -267,11 +267,44 @@ header { position:relative; z-index:10; padding:32px 32px 28px; border-bottom:1p
 .save-confirm { display:none; font-size:13px; color:var(--green); font-weight:600; font-family:'Montserrat',sans-serif; margin-top:10px; }
 
 @media (max-width:640px) {
-  .header-title { font-size:40px; letter-spacing:1px; }
-  .ign-logo { width:60px;height:60px; }
-  header { padding:20px 16px 16px; }
+  header { padding:16px 12px 12px; gap:10px; }
+  .ign-logo { width:50px; height:50px; }
+  .header-title { font-size:28px; letter-spacing:1px; }
+  .header-subtitle { font-size:11px; }
+  .header-updated { font-size:10px; }
+  .division-tabs { gap:6px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; margin-bottom:12px; }
+  .div-tab { padding:8px 14px; font-size:11px; flex-shrink:0; }
+  .view-tabs { gap:4px; padding:10px 8px; }
+  .view-tab { padding:7px 12px; font-size:10px; gap:4px; }
+  .schedule-wrap { padding:12px 6px; }
+  .sched-table th { font-size:9px; padding:6px 3px; }
+  .sched-table td { font-size:11px; padding:8px 3px; }
+  .sched-day-header { font-size:16px; margin:12px 0 8px; }
+  .standing-row { padding:10px 8px; }
+  .standing-header { font-size:9px; padding:8px; }
+  .standings-footer { font-size:11px; }
+  .bracket-grid { flex-direction:column; min-width:unset; gap:14px; align-items:stretch; }
+  .bracket-round { width:100%; }
+  .bracket-round-title { font-size:11px; padding:8px; }
+  .b-team { padding:8px 10px; gap:6px; }
+  .b-name { font-size:13px; }
+  .b-seed { font-size:10px; width:18px; height:18px; line-height:18px; }
+  .b-score { font-size:14px; }
+  .connector-h { display:none; }
+  .champ-box { width:100%; padding:14px; }
+  .champ-name { font-size:16px; }
+  .champ-label { font-size:10px; }
+  .home-info-grid { grid-template-columns:1fr; gap:10px; }
+  .welcome-box { padding:14px 12px; margin:0 8px; }
+  .welcome-box p { font-size:13px; }
+  .divisions-grid { grid-template-columns:1fr 1fr; gap:10px; }
+  .team-card { padding:10px; }
+  .matchup-card { padding:10px 8px; gap:8px; }
   .schedule-grid-controls { flex-direction:column; align-items:stretch; }
   .schedule-grid-controls input, .schedule-grid-controls select { width:100%; }
+  footer { padding:16px; }
+  .footer-title { font-size:20px; }
+  .footer-info { font-size:10px; }
 }
 </style>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
