@@ -1085,9 +1085,9 @@ function adminSave(){
     if(mi<numSemis)b.semis[mi]=matchup;
     else{b.final=matchup;b.champion=winner===1?t1:winner===2?t2:'TBD';}
   }
-  // Auto-seed bracket from standings
-  const tc=d.teams.length;const hasGP=sorted.some(s=>s.w>0||s.l>0);
-  if(hasGP){
+  // Auto-seed bracket from standings (only when all pool games done)
+  const tc=d.teams.length;const poolDone=d.poolGames.length>0&&d.poolGames.every(g=>g.score1!=null&&g.score2!=null&&g.score1!==''&&g.score2!=='');
+  if(poolDone){
     if(tc>=4){
       if(b.semis.length<2)b.semis.push({t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0});
       b.semis[0].t1=sorted[0].team;b.semis[0].t2=sorted[3].team;
