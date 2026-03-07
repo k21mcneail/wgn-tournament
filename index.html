@@ -1085,6 +1085,18 @@ function adminSave(){
     if(mi<numSemis)b.semis[mi]=matchup;
     else{b.final=matchup;b.champion=winner===1?t1:winner===2?t2:'TBD';}
   }
+  // Auto-seed bracket from standings
+  const tc=d.teams.length;const hasGP=sorted.some(s=>s.w>0||s.l>0);
+  if(hasGP){
+    if(tc>=4){
+      if(b.semis.length<2)b.semis.push({t1:"TBD",t2:"TBD",score1:"",score2:"",winner:0});
+      b.semis[0].t1=sorted[0].team;b.semis[0].t2=sorted[3].team;
+      b.semis[1].t1=sorted[1].team;b.semis[1].t2=sorted[2].team;
+    } else if(tc===3){
+      b.semis[0].t1=sorted[1].team;b.semis[0].t2=sorted[2].team;
+      b.final.t1=sorted[0].team;
+    }
+  }
   saveScheduleGridFromDOM();
   buildGlobalScheduleFromGrid();
   saveData();render();
