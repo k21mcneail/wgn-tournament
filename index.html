@@ -673,7 +673,7 @@ function calcStandingsFromMatchups(){
   const d=cdiv();
   const stats={};
   d.teams.forEach(t=>{stats[t]={w:0,l:0,pf:0,pa:0};});
-  d.poolGames.filter(g=>g.selected&&g.score1!==null&&g.score2!==null&&g.score1!==''&&g.score2!=='').forEach(g=>{
+  d.poolGames.filter(g=>g.score1!=null&&g.score2!=null&&g.score1!==''&&g.score2!=='').forEach(g=>{
     const s1=parseInt(g.score1)||0, s2=parseInt(g.score2)||0;
     if(stats[g.t1])stats[g.t1].pf+=s1;
     if(stats[g.t1])stats[g.t1].pa+=s2;
@@ -1060,7 +1060,7 @@ function adminSave(){
       // Auto-calculate standings from pool game scores
       const stats={};
       d.teams.forEach(t=>{stats[t]={w:0,l:0,pf:0,pa:0};});
-      d.poolGames.filter(g=>g.selected&&g.score1!==null&&g.score2!==null&&g.score1!==''&&g.score2!=='').forEach(g=>{
+      d.poolGames.filter(g=>g.score1!=null&&g.score2!=null&&g.score1!==''&&g.score2!=='').forEach(g=>{
         const s1=parseInt(g.score1)||0, s2=parseInt(g.score2)||0;
         if(stats[g.t1]){stats[g.t1].pf+=s1;stats[g.t1].pa+=s2;}
         if(stats[g.t2]){stats[g.t2].pf+=s2;stats[g.t2].pa+=s1;}
