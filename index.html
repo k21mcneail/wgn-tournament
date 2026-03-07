@@ -823,49 +823,15 @@ function renderStandings(){
   document.getElementById('standingsFooter').innerHTML=completed+' wins recorded • 🏀 '+(live?'Bracket seeded':'Bracket pending');
 }
 function renderBracket(){
-  const d=cdiv();
-  const b=d.bracket;
-  const tc=d.teams.length;
-  const sorted=[...d.standings].sort((a,b2)=>b2.w!==a.w?b2.w-a.w:(b2.pf-b2.pa)-(a.pf-a.pa));
-  function mh(m,seedLabels){
-    const s1=seedLabels?seedLabels[0]:'';
-    const s2=seedLabels?seedLabels[1]:'';
-    return '<div class="bracket-matchup"><div class="b-team '+(m.winner===1?'winner':'')+'"><div class="b-seed">'+s1+'</div><div class="b-name">'+(m.t1||'TBD')+'</div><div class="b-score">'+(m.score1!==''&&m.score1!==undefined&&m.score1!==null?m.score1:'—')+'</div></div><div class="b-team '+(m.winner===2?'winner':'')+'"><div class="b-seed">'+s2+'</div><div class="b-name">'+(m.t2||'TBD')+'</div><div class="b-score">'+(m.score2!==''&&m.score2!==undefined&&m.score2!==null?m.score2:'—')+'</div></div></div>';
-  }
-  function byeCard(teamName){
-    return '<div class="bracket-matchup" style="border-color:rgba(212,98,42,0.25);background:rgba(212,98,42,0.04);"><div class="b-team winner"><div class="b-seed" style="color:var(--orange);font-weight:800;">1</div><div class="b-name" style="color:var(--orange);font-weight:800;">'+teamName+'</div><div class="b-score" style="color:var(--orange);">BYE</div></div><div class="b-team" style="opacity:0.4;"><div class="b-seed"></div><div class="b-name" style="font-style:italic;">#1 seed advances to championship</div><div class="b-score"></div></div></div>';
-  }
-  let html='<div class="bracket-grid">';
-
-  if(tc>=4 && b.semis.length>=2){
-    // ===== 4-TEAM BRACKET: Semi #1v#4, Semi #2v#3, Championship =====
-    html+='<div class="bracket-round"><div class="bracket-round-title">Semifinals</div><div class="bracket-matchups">';
-    html+=mh(b.semis[0],['1','4']);
-    html+=mh(b.semis[1],['2','3']);
-    html+='</div></div>';
-    html+='<div class="connector-h"></div>';
-    html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final)+'</div></div>';
-  } else if(tc===3 || (tc>=3 && b.semis.length===1)){
-    // ===== 3-TEAM BRACKET: #1 Bye + #2v#3 Semi, then Championship =====
-    const topSeed=sorted.length>0?sorted[0].team:(b.final.t1!=='TBD'?b.final.t1:'#1 Seed');
-    html+='<div class="bracket-round"><div class="bracket-round-title">Semifinals</div><div class="bracket-matchups">';
-    html+=byeCard(topSeed);
-    html+=mh(b.semis[0],['2','3']);
-    html+='</div></div>';
-    html+='<div class="connector-h"></div>';
-    html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final)+'</div></div>';
-  } else if(tc===2){
-    // ===== 2-TEAM: Just Championship =====
-    html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final,['1','2'])+'</div></div>';
-  } else {
-    html+='<div style="padding:20px;text-align:center;color:var(--text-secondary);">Add teams and play pool games to generate the bracket.</div>';
-  }
-
-  html+='<div class="connector-h"></div>';
-  html+='<div class="champ-box"><div class="champ-trophy">🏆</div><div class="champ-label">Champion</div><div class="champ-name">'+(b.champion||'TBD')+'</div></div>';
-  html+='</div>';
-  document.getElementById('bracketWrap').innerHTML=html;
-}
+const d=cdiv();const b=d.bracket;const tc=d.teams.length;const sorted=[...d.standings].sort((a,b2)=>b2.w!==a.w?b2.w-a.w:(b2.pf-b2.pa)-(a.pf-a.pa));
+function schedInfo(gameId){const gs=tournamentData.globalSchedule;for(let di=0;di<gs.days.length;di++){const day=gs.days[di];const grid=day.grid||{};const slots=genSlots(day.startTime||'09:00',day.slotCount||4);for(let si=0;si<slots.length;si++){for(let ci=0;ci<COURTS.length;ci++){if(grid[si+'_'+ci]===gameId){return '<div style="text-align:center;font-size:0.82rem;color:#d4622a;margin-top:4px;font-weight:600;">'+slots[si]+' \u00b7 '+COURTS[ci]+'</div>';}}}}return '';}
+function mh(m,seedLabels){const s1=seedLabels?seedLabels[0]:'';const s2=seedLabels?seedLabels[1]:'';return '<div class="bracket-matchup"><div class="b-team '+(m.winner===1?'winner':'')+'"><div class="b-seed">'+s1+'</div><div class="b-name">'+(m.t1||'TBD')+'</div><div class="b-score">'+(m.score1!==''&&m.score1!==undefined&&m.score1!==null?m.score1:'-')+'</div></div><div class="b-team '+(m.winner===2?'winner':'')+'"><div class="b-seed">'+s2+'</div><div class="b-name">'+(m.t2||'TBD')+'</div><div class="b-score">'+(m.score2!==''&&m.score2!==undefined&&m.score2!==null?m.score2:'-')+'</div></div></div>';}
+function byeCard(teamName){return '<div class="bracket-matchup" style="border-color:rgba(212,98,42,0.25);background:rgba(212,98,42,0.04);"><div class="b-team winner"><div class="b-seed">1</div><div class="b-name">'+teamName+'</div><div class="b-score" style="color:#d4622a;">BYE</div></div></div>';}
+let html='<div class="bracket-grid">';
+if(tc>=4&&b.semis.length>=2){html+='<div class="bracket-round"><div class="bracket-round-title">Semifinals</div><div class="bracket-matchups">';html+=mh(b.semis[0],['1','4'])+schedInfo(d.id+'_semi_0');html+=mh(b.semis[1],['2','3'])+schedInfo(d.id+'_semi_1');html+='</div></div>';html+='<div class="connector-h"></div>';html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final)+schedInfo(d.id+'_champ')+'</div></div>';}
+else if(tc===3||(tc>=3&&b.semis.length===1)){const topSeed=sorted.length>0?sorted[0].team:(b.final.t1!=='TBD'?b.final.t1:'#1 Seed');html+='<div class="bracket-round"><div class="bracket-round-title">Semifinals</div><div class="bracket-matchups">';html+=byeCard(topSeed);html+=mh(b.semis[0],['2','3'])+schedInfo(d.id+'_semi_0');html+='</div></div>';html+='<div class="connector-h"></div>';html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final)+schedInfo(d.id+'_champ')+'</div></div>';}
+else if(tc===2){html+='<div class="bracket-round"><div class="bracket-round-title">Championship</div><div class="bracket-matchups">'+mh(b.final,['1','2'])+schedInfo(d.id+'_champ')+'</div></div>';}
+const champ=b.champion&&b.champion!=='TBD'?b.champion:'';html+='<div class="connector-h"></div>';html+='<div class="champ-box">'+(champ?'<div class="champ-trophy">\ud83c\udfc6</div><div class="champ-label">Champion</div><div class="champ-name">'+champ+'</div>':'<div class="champ-trophy" style="opacity:0.3">\ud83c\udfc6</div><div class="champ-label">Champion</div><div class="champ-name" style="opacity:0.4">TBD</div>')+'</div>';html+='</div>';document.getElementById('bracketWrap').innerHTML=html;}
 function renderSchedule(){
   const games=currentCourtFilter?tournamentData.globalSchedule.games.filter(g=>g.court===currentCourtFilter):tournamentData.globalSchedule.games;
   if(!games||games.length===0){
