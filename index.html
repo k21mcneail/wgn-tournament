@@ -1084,6 +1084,9 @@ function adminSave(){
     if(mi<numSemis)b.semis[mi]=matchup;
     else{b.final=matchup;b.champion=winner===1?t1:winner===2?t2:'TBD';}
   }
+  // Auto-advance: determine winners from scores and advance to next round
+  b.semis.forEach(function(semi,idx){if(semi.score1!==''&&semi.score2!==''&&semi.score1!==semi.score2){semi.winner=semi.score1>semi.score2?1:2;}if(semi.winner===1||semi.winner===2){const wt=semi.winner===1?semi.t1:semi.t2;if(wt&&wt!=='TBD'){if(b.semis.length>=2){if(idx===0)b.final.t1=wt;else if(idx===1)b.final.t2=wt;}else{b.final.t2=wt;}}}});
+  if(b.final.score1!==''&&b.final.score2!==''&&b.final.score1!==b.final.score2){b.final.winner=b.final.score1>b.final.score2?1:2;b.champion=b.final.winner===1?b.final.t1:b.final.winner===2?b.final.t2:'TBD';}
   // Auto-seed bracket from standings (only when all pool games done)
   const tc=d.teams.length;const poolDone=d.poolGames.length>0&&d.poolGames.every(g=>g.score1!=null&&g.score2!=null&&g.score1!==''&&g.score2!=='');
   if(poolDone){
