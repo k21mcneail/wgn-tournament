@@ -1260,7 +1260,78 @@
     .register-heading h2 { font-size: 32px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
   }
-</style>
+
+    /* ======= MOBILE FORM FIX ======= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+    }
+
+    .registration-form,
+    .order-summary {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .registration-form input,
+    .registration-form select,
+    .registration-form button,
+    .registration-form textarea {
+      max-width: 100%;
+    }
+
+    @media (max-width: 480px) {
+      .register-section {
+        padding: 40px 16px;
+      }
+
+      .registration-form {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+        border-radius: 16px;
+      }
+
+      .register-heading h2 {
+        font-size: 26px;
+      }
+
+      .form-steps {
+        gap: 4px;
+        flex-wrap: nowrap;
+        justify-content: center;
+      }
+
+      .step-divider {
+        width: 20px;
+        min-width: 20px;
+      }
+
+      .step-label {
+        font-size: 12px;
+      }
+
+      .camper-card {
+        padding: 16px;
+      }
+
+      .order-summary {
+        padding: 24px 16px;
+        max-width: 100%;
+      }
+
+      .submit-group {
+        flex-direction: column;
+      }
+
+      .form-submit {
+        width: 100%;
+      }
+    }
+
+    </style>
 </head>
 <body>
 
@@ -1520,10 +1591,10 @@
       <div class="form-group full">
         <label for="num-campers">Number of Campers *</label>
         <select id="num-campers" name="num_campers" required>
-          <option value="1">1 Camper — $65</option>
-          <option value="2">2 Campers — $120.25 (15% off 2nd)</option>
-          <option value="3">3 Campers — $175.50 (15% off 2nd & 3rd)</option>
-          <option value="4">4 Campers — $230.75 (15% off 2nd, 3rd & 4th)</option>
+          <option value="1">1 Camper â $65</option>
+          <option value="2">2 Campers â $120.25 (15% off 2nd)</option>
+          <option value="3">3 Campers â $175.50 (15% off 2nd & 3rd)</option>
+          <option value="4">4 Campers â $230.75 (15% off 2nd, 3rd & 4th)</option>
         </select>
         <span style="font-size:12px;color:#22c55e;margin-top:6px;font-weight:500;">Sibling discount: 15% off each additional camper! Each camper can be in a different session.</span>
       </div>
@@ -1539,11 +1610,11 @@
       <div class="order-title">Order Summary</div>
       <div class="order-row">
         <span class="order-label">Parent/Guardian</span>
-        <span class="order-value" id="sum-parent">—</span>
+        <span class="order-value" id="sum-parent">â</span>
       </div>
       <div class="order-row">
         <span class="order-label">Email</span>
-        <span class="order-value" id="sum-email">—</span>
+        <span class="order-value" id="sum-email">â</span>
       </div>
       <div class="order-row">
         <span class="order-label">Dates</span>
@@ -1552,7 +1623,7 @@
       <div id="sum-campers-list"></div>
       <div class="order-row" id="sum-discount-row" style="display:none;">
         <span class="order-label">Sibling Discount (15% off additional)</span>
-        <span class="order-value" id="sum-discount" style="color:#22c55e;">—</span>
+        <span class="order-value" id="sum-discount" style="color:#22c55e;">â</span>
       </div>
       <div class="order-total">
         <span class="order-label">Total</span>
@@ -1572,7 +1643,7 @@
       <div class="confirm-icon">&#10003;</div>
       <div class="confirm-title">You're Registered!</div>
       <p class="confirm-message">
-        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">—</strong>.
+        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">â</strong>.
       </p>
       <div class="confirm-details" id="conf-details">
         <div id="conf-campers-list"></div>
@@ -1590,7 +1661,7 @@
         </div>
       </div>
       <div class="confirm-ref">
-        Confirmation # <strong id="conf-ref">—</strong>
+        Confirmation # <strong id="conf-ref">â</strong>
       </div>
       <div class="confirm-cta">
         <a href="tel:8705650388" class="btn-confirm-action btn-confirm-ghost">Questions? Call Us</a>
@@ -1846,7 +1917,7 @@
     showConfirmationFromStorage();
   }
 
-  // STEP 1 → STEP 2
+  // STEP 1 â STEP 2
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -1922,7 +1993,7 @@
     document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // STEP 2 → BACK TO STEP 1
+  // STEP 2 â BACK TO STEP 1
   btnBack.addEventListener('click', function() {
     orderSummary.classList.remove('visible');
     form.style.display = '';
@@ -1930,7 +2001,7 @@
     document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // STEP 2 → STRIPE PAYMENT
+  // STEP 2 â STRIPE PAYMENT
   btnPay.addEventListener('click', function() {
     const payText = document.getElementById('pay-text');
     payText.innerHTML = '<span class="spinner"></span> Redirecting to payment...';
