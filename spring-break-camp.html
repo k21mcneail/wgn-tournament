@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Break Basketball Camp | IGN Academy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #FF8C32;
+    --orange-dark: #FF6B00;
+    --orange-light: #FFB366;
+    --orange-glow: rgba(255,140,50,0.15);
+    --bg: #050505;
+    --surface: #0c0c0c;
+    --surface-2: #141414;
+    --surface-3: #1c1c1c;
+    --text: #ffffff;
+    --text-muted: rgba(255,255,255,0.55);
+    --text-dim: rgba(255,255,255,0.3);
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,140,50,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,5,5,0.85);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .nav-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 0 20px rgba(255,140,50,0.2);
+  }
+
+  .nav-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-link:hover { color: var(--orange); }
+
+  .nav-cta {
+    padding: 10px 26px;
+    background: var(--orange);
+    border-radius: 100px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(255,140,50,0.2);
+  }
+
+  .nav-cta:hover { box-shadow: 0 6px 24px rgba(255,140,50,0.35); transform: translateY(-1px); }
+
+  /* ========== HERO ========== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 30% 50%, black 30%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Orange glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,140,50,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Left content */
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    border: 1px solid rgba(255,140,50,0.3);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 28px;
+  }
+
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .gradient {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .hero-meta-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255,140,50,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(255,107,0,0.25);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,0,0.35); }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+  }
+
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); }
+
+  /* Right: Feature card */
+  .hero-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  }
+
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+
+  .card-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 4px;
+    letter-spacing: -1px;
+  }
+
+  .card-date-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .card-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  .card-session {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .card-session:last-child { border-bottom: none; }
+
+  .session-grade {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .session-time {
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 500;
+  }
+
+  .card-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .price-amount {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    color: var(--orange);
+  }
+
+  .price-per {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  /* ========== WHAT YOU GET ========== */
+  .section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    letter-spacing: -1px;
+    margin-bottom: 48px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 28px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255,140,50,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .feature-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* ========== SCHEDULE ========== */
+  .schedule-section {
+    padding: 100px 48px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .schedule-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .schedule-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.3s;
+  }
+
+  .schedule-card:hover { border-color: var(--border-hover); }
+
+  .schedule-badge {
+    display: inline-flex;
+    padding: 6px 16px;
+    background: rgba(255,140,50,0.08);
+    border: 1px solid rgba(255,140,50,0.2);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .schedule-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .schedule-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .schedule-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .schedule-detail:last-child { border-bottom: none; }
+
+  .schedule-detail-icon { font-size: 16px; width: 24px; text-align: center; }
+
+  .schedule-detail strong { color: var(--text); font-weight: 600; }
+
+  /* ========== LOCATION ========== */
+  .location-section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .location-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .location-address {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .contact-icon { font-size: 16px; width: 20px; text-align: center; }
+
+  .contact-row a {
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .map-embed {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 320px;
+  }
+
+  .map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(0.8) brightness(0.7) contrast(1.1);
+  }
+
+  /* ========== CTA ========== */
+  .cta-section {
+    text-align: center;
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,140,50,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-section .btn-primary {
+    position: relative;
+    z-index: 2;
+    padding: 18px 44px;
+    font-size: 16px;
+  }
+
+  .cta-details {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-detail {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .cta-detail strong {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ========== REGISTRATION FORM ========== */
+  .register-section {
+    padding: 100px 48px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .register-heading {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .register-heading h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .register-heading p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .urgency-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255,107,0,0.1);
+    border: 1px solid rgba(255,107,0,0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--orange);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .urgency-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: pulse 2s infinite;
+  }
+
+  .registration-form {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-dim);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--orange);
+    background: rgba(255,140,50,0.03);
+    box-shadow: 0 0 0 3px rgba(255,140,50,0.1);
+  }
+
+  .form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23FF8C32' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+  }
+
+  .radio-group {
+    grid-column: 1 / -1;
+  }
+
+  .radio-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 16px;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .radio-option:hover {
+    border-color: var(--orange);
+    background: rgba(255,140,50,0.03);
+  }
+
+  .radio-option input[type="radio"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    accent-color: var(--orange);
+  }
+
+  .radio-option label {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: none;
+    cursor: pointer;
+    letter-spacing: normal;
+  }
+
+  .submit-group {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .form-submit {
+    flex: 1;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 32px rgba(255,107,0,0.25);
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255,107,0,0.35);
+  }
+
+  .form-submit:active {
+    transform: translateY(0);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Step indicator */
+  .form-steps {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid var(--border);
+    color: var(--text-dim);
+    transition: all 0.3s;
+  }
+
+  .step-circle.active {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(255,140,50,0.08);
+  }
+
+  .step-circle.completed {
+    border-color: #22c55e;
+    background: #22c55e;
+    color: #fff;
+  }
+
+  .step-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .step-label.active { color: var(--text); }
+  .step-label.completed { color: #22c55e; }
+
+  .step-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--border);
+    margin: 0 4px;
+    transition: background 0.3s;
+  }
+
+  .step-divider.completed {
+    background: #22c55e;
+  }
+
+  /* Order summary panel */
+  .order-summary {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: none;
+  }
+
+  .order-summary.visible { display: block; }
+
+  .order-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+
+  .order-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+  }
+
+  .order-row:last-of-type { border-bottom: none; }
+
+  .order-label { color: var(--text-muted); }
+  .order-value { color: var(--text); font-weight: 500; }
+
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-top: 16px;
+    border-top: 2px solid var(--border);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .order-total .order-value {
+    color: var(--orange);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+  }
+
+  .order-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .btn-back {
+    padding: 16px 28px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-back:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .btn-pay {
+    flex: 1;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 32px rgba(255,107,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255,107,0,0.35);
+  }
+
+  .secure-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Confirmation / Thank You */
+  .confirmation {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: none;
+  }
+
+  .confirmation.visible { display: block; }
+
+  .confirm-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.1);
+    border: 3px solid #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 28px;
+    animation: scaleIn 0.5s ease;
+  }
+
+  @keyframes scaleIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .confirm-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .confirm-message {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .confirm-details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    text-align: left;
+  }
+
+  .confirm-details .order-row {
+    font-size: 13px;
+  }
+
+  .confirm-ref {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+
+  .confirm-ref strong {
+    color: var(--orange);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+  }
+
+  .confirm-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .btn-confirm-action {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
+  }
+
+  .btn-confirm-primary {
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,107,0,0.2);
+  }
+
+  .btn-confirm-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+  }
+
+  /* Camper cards */
+  .camper-card {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+  }
+
+  .camper-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .camper-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .camper-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .camper-card-price {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .camper-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .camper-fields .form-group {
+    margin: 0;
+  }
+
+  .camper-fields .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  .camper-fields .radio-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .camper-fields .radio-option {
+    flex: 1;
+    padding: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .camper-fields { grid-template-columns: 1fr; }
+    .camper-fields .radio-options { flex-direction: column; }
+  }
+
+  /* Spinner */
+  .spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-link { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 44px; letter-spacing: -1px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .schedule-grid { grid-template-columns: 1fr; }
+    .location-grid { grid-template-columns: 1fr; }
+    .section, .schedule-section, .location-section, .register-section { padding: 60px 20px; }
+    .cta-section { padding: 80px 20px; }
+    .cta-section h2 { font-size: 36px; }
+    .cta-details { flex-direction: column; gap: 8px; }
+    .registration-form { grid-template-columns: 1fr; padding: 32px 20px; }
+    .register-heading h2 { font-size: 32px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <div class="nav-logo">IGN</div>
+      <span class="nav-brand">IGN Academy</span>
+    </div>
+    <div class="nav-right">
+      <a href="#schedule" class="nav-link">Schedule</a>
+      <a href="#location" class="nav-link">Location</a>
+      <a href="#register" class="nav-link">Contact</a>
+      <a href="#register" class="nav-cta">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <!-- Left -->
+      <div>
+        <div class="hero-tag">
+          <span class="hero-dot"></span>
+          Limited Spots Available
+        </div>
+        <h1>
+          SPRING BREAK<br>
+          <span class="gradient">BASKETBALL</span><br>
+          CAMP
+        </h1>
+        <p class="hero-desc">
+          Two days of intensive skill development, competitive drills, games, and basketball IQ training at IGN Academy. K-8th grade. No experience level left behind.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-icon">&#128197;</div>
+            <span>March 23-24</span>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-icon">&#128205;</div>
+            <span>Conway, AR</span>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-icon">&#127942;</div>
+            <span>K-8th Grade</span>
+          </div>
+        </div>
+        <div class="hero-buttons">
+          <a href="#register" class="btn btn-primary">Register Now &rarr;</a>
+          <a href="#schedule" class="btn btn-ghost">View Schedule</a>
+        </div>
+      </div>
+
+      <!-- Right: Info card -->
+      <div class="hero-card">
+        <div class="card-label">Event Details</div>
+        <div class="card-date">March 23 & 24, 2026</div>
+        <div class="card-date-sub">Monday & Tuesday &middot; Spring Break</div>
+
+        <div class="card-divider"></div>
+
+        <div class="card-session">
+          <span class="session-grade">K - 2nd Grade</span>
+          <span class="session-time">9:00 AM - 11:00 AM</span>
+        </div>
+        <div class="card-session">
+          <span class="session-grade">3rd - 8th Grade</span>
+          <span class="session-time">12:00 PM - 2:00 PM</span>
+        </div>
+
+        <div class="card-price">
+          <span class="price-amount">$65</span>
+          <span class="price-per">per camper</span>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;font-size:13px;color:#22c55e;font-weight:600;text-align:center;">
+          Sibling Discount: 15% off each additional camper
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <div class="section">
+    <div class="section-tag">What Campers Get</div>
+    <h2 class="section-title">Two Days of Elite Development</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#127936;</div>
+        <div class="feature-name">Skill Development</div>
+        <p class="feature-desc">Ball handling, shooting mechanics, footwork, finishing at the rim, and defensive fundamentals. Every session is designed to build real, lasting skills.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9889;</div>
+        <div class="feature-name">Competitive Drills</div>
+        <p class="feature-desc">High-intensity, game-speed drills that put skills to the test under pressure. Players learn to compete and perform when it matters most.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127942;</div>
+        <div class="feature-name">Live Scrimmages</div>
+        <p class="feature-desc">Full scrimmages with coaching and real-time feedback. The best way to apply new skills is in game situations with coaches watching every play.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#129504;</div>
+        <div class="feature-name">Basketball IQ</div>
+        <p class="feature-desc">Decision-making, court awareness, reading defenses, and understanding spacing. The mental side of the game is what separates good from great.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128170;</div>
+        <div class="feature-name">Age-Appropriate Groups</div>
+        <p class="feature-desc">K-2nd and 3rd-8th grade sessions ensure every camper gets coaching at their level. No one gets left behind or held back.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127775;</div>
+        <div class="feature-name">Skilled Coaching</div>
+        <p class="feature-desc">IGN Academy coaches bring experience developing players from youth to high school, college, and beyond. Every rep counts.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="schedule-section" id="schedule">
+    <div class="schedule-inner">
+      <div class="section-tag">Schedule</div>
+      <h2 class="section-title">Two Sessions, Two Days</h2>
+      <div class="schedule-grid">
+        <div class="schedule-card">
+          <div class="schedule-badge">Session 1</div>
+          <div class="schedule-title">K - 2nd Grade</div>
+          <div class="schedule-subtitle">Young ballers foundation camp</div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#128197;</span>
+            <span><strong>Dates:</strong> March 23 & 24, 2026</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#9200;</span>
+            <span><strong>Time:</strong> 9:00 AM - 11:00 AM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#128176;</span>
+            <span><strong>Cost:</strong> $65 per camper</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#127919;</span>
+            <span><strong>Focus:</strong> Fundamentals, coordination, fun drills, games</span>
+          </div>
+        </div>
+        <div class="schedule-card">
+          <div class="schedule-badge">Session 2</div>
+          <div class="schedule-title">3rd - 8th Grade</div>
+          <div class="schedule-subtitle">Competitive development camp</div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#128197;</span>
+            <span><strong>Dates:</strong> March 23 & 24, 2026</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#9200;</span>
+            <span><strong>Time:</strong> 12:00 PM - 2:00 PM</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#128176;</span>
+            <span><strong>Cost:</strong> $65 per camper</span>
+          </div>
+          <div class="schedule-detail">
+            <span class="schedule-detail-icon">&#127919;</span>
+            <span><strong>Focus:</strong> Skill development, IQ, competitive drills, games</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="location-section" id="location">
+    <div class="section-tag">Location</div>
+    <h2 class="section-title">Where To Find Us</h2>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>IGN Academy</h3>
+        <p class="location-address">
+          1350 EW Martin Drive<br>
+          Conway, AR 72032
+        </p>
+        <div class="contact-row">
+          <span class="contact-icon">&#128222;</span>
+          <a href="tel:8705650388">(870) 565-0388</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">&#9993;</span>
+          <a href="mailto:amcneail@ignacademy.com">amcneail@ignacademy.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">&#127760;</span>
+          <a href="https://ignacademy.carrd.co" target="_blank">ignacademy.carrd.co</a>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="#register" class="btn btn-primary" style="display:inline-flex;">Register Now &rarr;</a>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.9239366832503!2d-92.4445!3d35.092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87cf7f2b8b8b8b8b%3A0x0!2s1350%20EW%20Martin%20Drive%2C%20Conway%2C%20AR%2072032!5e0!3m2!1sen!2sus!4v1234567890"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION FORM -->
+  <section class="register-section" id="register">
+    <div class="register-heading">
+      <div class="urgency-banner">
+        <span class="urgency-dot"></span>
+        Camp Starts in 2 Weeks
+      </div>
+      <h2 id="register-title">Register Your Camper</h2>
+      <p id="register-subtitle">Limited spots available for our Spring Break Basketball Camp. K-8th grade. March 23-24, 2026.</p>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="form-steps">
+      <div class="step-item">
+        <div class="step-circle active" id="step-circle-1">1</div>
+        <span class="step-label active" id="step-label-1">Details</span>
+      </div>
+      <div class="step-divider" id="step-div-1"></div>
+      <div class="step-item">
+        <div class="step-circle" id="step-circle-2">2</div>
+        <span class="step-label" id="step-label-2">Review</span>
+      </div>
+      <div class="step-divider" id="step-div-2"></div>
+      <div class="step-item">
+        <div class="step-circle" id="step-circle-3">3</div>
+        <span class="step-label" id="step-label-3">Confirmed</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: Registration Form -->
+    <form class="registration-form" id="reg-form">
+      <div class="form-group">
+        <label for="parent-first">Parent/Guardian First Name *</label>
+        <input type="text" id="parent-first" name="parent_first_name" placeholder="John" required>
+      </div>
+      <div class="form-group">
+        <label for="parent-last">Parent/Guardian Last Name *</label>
+        <input type="text" id="parent-last" name="parent_last_name" placeholder="Smith" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+      </div>
+      <div class="form-group full">
+        <label for="num-campers">Number of Campers *</label>
+        <select id="num-campers" name="num_campers" required>
+          <option value="1">1 Camper — $65</option>
+          <option value="2">2 Campers — $120.25 (15% off 2nd)</option>
+          <option value="3">3 Campers — $175.50 (15% off 2nd & 3rd)</option>
+          <option value="4">4 Campers — $230.75 (15% off 2nd, 3rd & 4th)</option>
+        </select>
+        <span style="font-size:12px;color:#22c55e;margin-top:6px;font-weight:500;">Sibling discount: 15% off each additional camper! Each camper can be in a different session.</span>
+      </div>
+      <!-- Dynamic camper fields container -->
+      <div id="campers-container" class="form-group full" style="display:flex;flex-direction:column;gap:16px;"></div>
+      <div class="submit-group">
+        <button type="submit" class="form-submit">Continue to Payment &rarr;</button>
+      </div>
+    </form>
+
+    <!-- STEP 2: Order Summary & Payment -->
+    <div class="order-summary" id="order-summary">
+      <div class="order-title">Order Summary</div>
+      <div class="order-row">
+        <span class="order-label">Parent/Guardian</span>
+        <span class="order-value" id="sum-parent">—</span>
+      </div>
+      <div class="order-row">
+        <span class="order-label">Email</span>
+        <span class="order-value" id="sum-email">—</span>
+      </div>
+      <div class="order-row">
+        <span class="order-label">Dates</span>
+        <span class="order-value">March 23 & 24, 2026</span>
+      </div>
+      <div id="sum-campers-list"></div>
+      <div class="order-row" id="sum-discount-row" style="display:none;">
+        <span class="order-label">Sibling Discount (15% off additional)</span>
+        <span class="order-value" id="sum-discount" style="color:#22c55e;">—</span>
+      </div>
+      <div class="order-total">
+        <span class="order-label">Total</span>
+        <span class="order-value" id="sum-total">$65</span>
+      </div>
+      <div class="order-actions">
+        <button class="btn-back" id="btn-back">&larr; Back</button>
+        <button class="btn-pay" id="btn-pay">
+          <span id="pay-text">Pay &amp; Confirm</span>
+        </button>
+      </div>
+      <div class="secure-note">&#128274; Secure payment processed by Stripe</div>
+    </div>
+
+    <!-- STEP 3: Confirmation / Thank You -->
+    <div class="confirmation" id="confirmation">
+      <div class="confirm-icon">&#10003;</div>
+      <div class="confirm-title">You're Registered!</div>
+      <p class="confirm-message">
+        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">—</strong>.
+      </p>
+      <div class="confirm-details" id="conf-details">
+        <div id="conf-campers-list"></div>
+        <div class="order-row">
+          <span class="order-label">Dates</span>
+          <span class="order-value">March 23 & 24, 2026</span>
+        </div>
+        <div class="order-row">
+          <span class="order-label">Location</span>
+          <span class="order-value">1350 EW Martin Drive, Conway, AR</span>
+        </div>
+        <div class="order-row">
+          <span class="order-label">Amount Paid</span>
+          <span class="order-value" id="conf-total" style="color:var(--orange);font-weight:700;">$65.00</span>
+        </div>
+      </div>
+      <div class="confirm-ref">
+        Confirmation # <strong id="conf-ref">—</strong>
+      </div>
+      <div class="confirm-cta">
+        <a href="tel:8705650388" class="btn-confirm-action btn-confirm-ghost">Questions? Call Us</a>
+        <a href="#" class="btn-confirm-action btn-confirm-primary" onclick="window.location.reload();return false;">Register Another Camper</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="nav-logo" style="width:32px;height:32px;font-size:11px;">IGN</div>
+      <span class="footer-copy">&copy; 2026 IGN Academy &middot; Conway, AR</span>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:amcneail@ignacademy.com">Email</a>
+      <a href="tel:8705650388">Call</a>
+      <a href="https://ignacademy.carrd.co">Training</a>
+    </div>
+  </footer>
+
+<script>
+  // ===== CONFIG =====
+  const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/9B6dRa0pbfG2bno2oI9IQ02';
+  const GHL_LOCATION_ID = 'duhoBROFzA4sXrQLyW8w';
+  const GHL_FORM_ID = 'rWj6H1JNJrzRhYSFCTQq';
+  const BASE_PRICE = 65;
+
+  // ===== REGISTRATION FLOW =====
+  const form = document.getElementById('reg-form');
+  const orderSummary = document.getElementById('order-summary');
+  const confirmation = document.getElementById('confirmation');
+  const btnBack = document.getElementById('btn-back');
+  const btnPay = document.getElementById('btn-pay');
+  const campersContainer = document.getElementById('campers-container');
+  const numCampersSelect = document.getElementById('num-campers');
+
+  // Store form data
+  let formData = {};
+
+  // Grade options HTML
+  const gradeOptionsHTML = '<option value="">Select Grade...</option><option value="Kindergarten">Kindergarten</option><option value="1st Grade">1st Grade</option><option value="2nd Grade">2nd Grade</option><option value="3rd Grade">3rd Grade</option><option value="4th Grade">4th Grade</option><option value="5th Grade">5th Grade</option><option value="6th Grade">6th Grade</option><option value="7th Grade">7th Grade</option><option value="8th Grade">8th Grade</option>';
+
+  // Build camper card HTML
+  function buildCamperCard(index, total) {
+    var num = index + 1;
+    var priceLabel = index === 0 ? '$65' : '$55.25 (15% off)';
+    return '<div class="camper-card" id="camper-card-' + num + '">' +
+      '<div class="camper-card-header">' +
+        '<div class="camper-number">' + num + '</div>' +
+        '<span class="camper-card-title">Camper ' + num + (total > 1 ? ' of ' + total : '') + '</span>' +
+        '<span class="camper-card-price">' + priceLabel + '</span>' +
+      '</div>' +
+      '<div class="camper-fields">' +
+        '<div class="form-group full">' +
+          '<label for="camper-name-' + num + '">Child\'s Name *</label>' +
+          '<input type="text" id="camper-name-' + num + '" name="camper_name_' + num + '" placeholder="Enter name" required>' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label for="camper-grade-' + num + '">Grade *</label>' +
+          '<select id="camper-grade-' + num + '" name="camper_grade_' + num + '" required>' + gradeOptionsHTML + '</select>' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label>Session *</label>' +
+          '<div class="radio-options">' +
+            '<div class="radio-option">' +
+              '<input type="radio" id="session-k2-' + num + '" name="camper_session_' + num + '" value="Session 1: K-2nd Grade (9-11 AM)" required>' +
+              '<label for="session-k2-' + num + '">K-2nd (9-11 AM)</label>' +
+            '</div>' +
+            '<div class="radio-option">' +
+              '<input type="radio" id="session-38-' + num + '" name="camper_session_' + num + '" value="Session 2: 3rd-8th Grade (12-2 PM)">' +
+              '<label for="session-38-' + num + '">3rd-8th (12-2 PM)</label>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // Render camper cards based on selection
+  function renderCamperCards() {
+    var count = parseInt(numCampersSelect.value) || 1;
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      html += buildCamperCard(i, count);
+    }
+    campersContainer.innerHTML = html;
+  }
+
+  // Initial render
+  renderCamperCards();
+
+  // Re-render when number changes (preserve data where possible)
+  numCampersSelect.addEventListener('change', function() {
+    // Save current values
+    var currentCount = campersContainer.querySelectorAll('.camper-card').length;
+    var savedData = [];
+    for (var i = 1; i <= currentCount; i++) {
+      var nameEl = document.getElementById('camper-name-' + i);
+      var gradeEl = document.getElementById('camper-grade-' + i);
+      var sessionEl = document.querySelector('input[name="camper_session_' + i + '"]:checked');
+      savedData.push({
+        name: nameEl ? nameEl.value : '',
+        grade: gradeEl ? gradeEl.value : '',
+        session: sessionEl ? sessionEl.value : ''
+      });
+    }
+
+    renderCamperCards();
+
+    // Restore saved values
+    var newCount = parseInt(numCampersSelect.value) || 1;
+    for (var j = 0; j < Math.min(savedData.length, newCount); j++) {
+      var idx = j + 1;
+      var nEl = document.getElementById('camper-name-' + idx);
+      var gEl = document.getElementById('camper-grade-' + idx);
+      if (nEl && savedData[j].name) nEl.value = savedData[j].name;
+      if (gEl && savedData[j].grade) gEl.value = savedData[j].grade;
+      if (savedData[j].session) {
+        var radios = document.querySelectorAll('input[name="camper_session_' + idx + '"]');
+        radios.forEach(function(r) { if (r.value === savedData[j].session) r.checked = true; });
+      }
+    }
+  });
+
+  // Generate confirmation reference
+  function genRef() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let ref = 'IGN-';
+    for (let i = 0; i < 8; i++) ref += chars[Math.floor(Math.random() * chars.length)];
+    return ref;
+  }
+
+  // Submit contact to GHL
+  function submitToGHL(data) {
+    // Build camper info string for GHL notes
+    var camperInfo = data.campers.map(function(c, i) {
+      return 'Camper ' + (i+1) + ': ' + c.name + ' (' + c.grade + ') - ' + c.session;
+    }).join(' | ');
+
+    fetch('https://services.leadconnectorhq.com/funnels/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formId: GHL_FORM_ID,
+        locationId: GHL_LOCATION_ID,
+        formData: {
+          first_name: data.parentFirst,
+          last_name: data.parentLast,
+          email: data.email,
+          phone: data.phone
+        },
+        fieldsOriSequence: ['first_name', 'last_name', 'email', 'phone']
+      })
+    }).catch(function() {
+      console.log('GHL submission attempted');
+    });
+  }
+
+  // Calculate total price
+  function calcTotal(numCampers) {
+    var total = BASE_PRICE;
+    if (numCampers > 1) {
+      total += (BASE_PRICE * 0.85) * (numCampers - 1);
+    }
+    return Math.round(total * 100) / 100;
+  }
+
+  // Update step indicators
+  function setStep(step) {
+    for (let i = 1; i <= 3; i++) {
+      const circle = document.getElementById('step-circle-' + i);
+      const label = document.getElementById('step-label-' + i);
+      circle.classList.remove('active', 'completed');
+      label.classList.remove('active', 'completed');
+      if (i < step) {
+        circle.classList.add('completed');
+        circle.innerHTML = '&#10003;';
+        label.classList.add('completed');
+      } else if (i === step) {
+        circle.classList.add('active');
+        circle.textContent = i;
+        label.classList.add('active');
+      } else {
+        circle.textContent = i;
+      }
+    }
+    document.getElementById('step-div-1').classList.toggle('completed', step > 1);
+    document.getElementById('step-div-2').classList.toggle('completed', step > 2);
+
+    const title = document.getElementById('register-title');
+    const subtitle = document.getElementById('register-subtitle');
+    if (step === 1) {
+      title.textContent = 'Register Your Camper';
+      subtitle.textContent = 'Limited spots available for our Spring Break Basketball Camp. K-8th grade. March 23-24, 2026.';
+    } else if (step === 2) {
+      title.textContent = 'Review & Pay';
+      subtitle.textContent = 'Please review your registration details below, then proceed to payment.';
+    } else if (step === 3) {
+      title.textContent = 'Registration Complete';
+      subtitle.textContent = 'Your spot is secured! See you on the court.';
+    }
+  }
+
+  // Show confirmation from saved data (returning from Stripe)
+  function showConfirmationFromStorage() {
+    try {
+      const saved = localStorage.getItem('ign_camp_registration');
+      if (!saved) return false;
+      const data = JSON.parse(saved);
+
+      if (Date.now() - data.timestamp > 3600000) {
+        localStorage.removeItem('ign_camp_registration');
+        return false;
+      }
+
+      // Populate confirmation
+      document.getElementById('conf-email').textContent = data.email;
+      document.getElementById('conf-ref').textContent = data.ref;
+
+      // Build camper rows for confirmation
+      var confList = document.getElementById('conf-campers-list');
+      confList.innerHTML = '';
+      if (data.campers && data.campers.length) {
+        data.campers.forEach(function(c, i) {
+          confList.innerHTML += '<div class="order-row"><span class="order-label">Camper ' + (i+1) + '</span><span class="order-value">' + c.name + '</span></div>' +
+            '<div class="order-row"><span class="order-label" style="padding-left:16px;">Grade</span><span class="order-value">' + c.grade + '</span></div>' +
+            '<div class="order-row"><span class="order-label" style="padding-left:16px;">Session</span><span class="order-value">' + c.session + '</span></div>';
+        });
+      }
+      document.getElementById('conf-total').textContent = '$' + (data.total || '65.00');
+
+      form.style.display = 'none';
+      orderSummary.classList.remove('visible');
+      confirmation.classList.add('visible');
+      setStep(3);
+      document.querySelector('.urgency-banner').style.display = 'none';
+
+      localStorage.removeItem('ign_camp_registration');
+
+      setTimeout(function() {
+        document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  // On page load: check if returning from Stripe payment
+  if (window.location.search.includes('payment=success') || document.referrer.includes('stripe.com') || document.referrer.includes('checkout.stripe.com')) {
+    showConfirmationFromStorage();
+  }
+
+  // STEP 1 → STEP 2
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var numCampers = parseInt(numCampersSelect.value) || 1;
+
+    // Gather camper data
+    var campers = [];
+    for (var i = 1; i <= numCampers; i++) {
+      var name = document.getElementById('camper-name-' + i).value.trim();
+      var grade = document.getElementById('camper-grade-' + i).value;
+      var sessionEl = document.querySelector('input[name="camper_session_' + i + '"]:checked');
+
+      if (!sessionEl) {
+        alert('Please select a session for Camper ' + i + '.');
+        return;
+      }
+
+      campers.push({
+        name: name,
+        grade: grade,
+        session: sessionEl.value
+      });
+    }
+
+    formData = {
+      parentFirst: document.getElementById('parent-first').value.trim(),
+      parentLast: document.getElementById('parent-last').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      numCampers: numCampers,
+      campers: campers
+    };
+
+    // Calculate pricing
+    var total = calcTotal(numCampers);
+    var savings = (BASE_PRICE * numCampers) - total;
+
+    // Populate order summary
+    document.getElementById('sum-parent').textContent = formData.parentFirst + ' ' + formData.parentLast;
+    document.getElementById('sum-email').textContent = formData.email;
+    document.getElementById('sum-total').textContent = '$' + total.toFixed(2);
+    document.getElementById('pay-text').innerHTML = 'Pay $' + total.toFixed(2) + ' &amp; Confirm';
+
+    // Build per-camper rows in summary
+    var sumList = document.getElementById('sum-campers-list');
+    sumList.innerHTML = '';
+    campers.forEach(function(c, idx) {
+      var price = idx === 0 ? '$65.00' : '$55.25';
+      sumList.innerHTML +=
+        '<div style="margin-top:12px;padding:12px 16px;background:rgba(255,140,50,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">' +
+            '<span style="font-weight:600;font-size:14px;color:var(--text);">Camper ' + (idx+1) + ': ' + c.name + '</span>' +
+            '<span style="font-size:13px;color:var(--orange);font-weight:600;">' + price + '</span>' +
+          '</div>' +
+          '<div style="font-size:13px;color:var(--text-muted);">' + c.grade + ' &middot; ' + c.session + '</div>' +
+        '</div>';
+    });
+
+    // Show/hide discount row
+    if (numCampers > 1) {
+      document.getElementById('sum-discount-row').style.display = '';
+      document.getElementById('sum-discount').textContent = '-$' + savings.toFixed(2);
+    } else {
+      document.getElementById('sum-discount-row').style.display = 'none';
+    }
+
+    // Show step 2
+    form.style.display = 'none';
+    orderSummary.classList.add('visible');
+    confirmation.classList.remove('visible');
+    setStep(2);
+
+    document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // STEP 2 → BACK TO STEP 1
+  btnBack.addEventListener('click', function() {
+    orderSummary.classList.remove('visible');
+    form.style.display = '';
+    setStep(1);
+    document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // STEP 2 → STRIPE PAYMENT
+  btnPay.addEventListener('click', function() {
+    const payText = document.getElementById('pay-text');
+    payText.innerHTML = '<span class="spinner"></span> Redirecting to payment...';
+    btnPay.disabled = true;
+    btnBack.disabled = true;
+
+    // Submit contact to GHL
+    submitToGHL(formData);
+
+    // Save registration data to localStorage (for confirmation on return)
+    const ref = genRef();
+    var total = calcTotal(formData.numCampers);
+    const regData = {
+      parentFirst: formData.parentFirst,
+      parentLast: formData.parentLast,
+      email: formData.email,
+      phone: formData.phone,
+      campers: formData.campers,
+      total: total.toFixed(2),
+      ref: ref,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('ign_camp_registration', JSON.stringify(regData));
+
+    // Redirect to Stripe Payment Link after brief delay
+    setTimeout(function() {
+      window.location.href = STRIPE_PAYMENT_LINK;
+    }, 800);
+  });
+</script>
+
+</body>
+</html>
