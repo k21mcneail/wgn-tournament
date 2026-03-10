@@ -1591,10 +1591,10 @@
       <div class="form-group full">
         <label for="num-campers">Number of Campers *</label>
         <select id="num-campers" name="num_campers" required>
-          <option value="1">1 Camper â $65</option>
-          <option value="2">2 Campers â $120.25 (15% off 2nd)</option>
-          <option value="3">3 Campers â $175.50 (15% off 2nd & 3rd)</option>
-          <option value="4">4 Campers â $230.75 (15% off 2nd, 3rd & 4th)</option>
+          <option value="1">1 Camper Ã¢ÂÂ $65</option>
+          <option value="2">2 Campers Ã¢ÂÂ $120.25 (15% off 2nd)</option>
+          <option value="3">3 Campers Ã¢ÂÂ $175.50 (15% off 2nd & 3rd)</option>
+          <option value="4">4 Campers Ã¢ÂÂ $230.75 (15% off 2nd, 3rd & 4th)</option>
         </select>
         <span style="font-size:12px;color:#22c55e;margin-top:6px;font-weight:500;">Sibling discount: 15% off each additional camper! Each camper can be in a different session.</span>
       </div>
@@ -1610,11 +1610,11 @@
       <div class="order-title">Order Summary</div>
       <div class="order-row">
         <span class="order-label">Parent/Guardian</span>
-        <span class="order-value" id="sum-parent">â</span>
+        <span class="order-value" id="sum-parent">Ã¢ÂÂ</span>
       </div>
       <div class="order-row">
         <span class="order-label">Email</span>
-        <span class="order-value" id="sum-email">â</span>
+        <span class="order-value" id="sum-email">Ã¢ÂÂ</span>
       </div>
       <div class="order-row">
         <span class="order-label">Dates</span>
@@ -1623,7 +1623,7 @@
       <div id="sum-campers-list"></div>
       <div class="order-row" id="sum-discount-row" style="display:none;">
         <span class="order-label">Sibling Discount (15% off additional)</span>
-        <span class="order-value" id="sum-discount" style="color:#22c55e;">â</span>
+        <span class="order-value" id="sum-discount" style="color:#22c55e;">Ã¢ÂÂ</span>
       </div>
       <div class="order-total">
         <span class="order-label">Total</span>
@@ -1643,7 +1643,7 @@
       <div class="confirm-icon">&#10003;</div>
       <div class="confirm-title">You're Registered!</div>
       <p class="confirm-message">
-        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">â</strong>.
+        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">Ã¢ÂÂ</strong>.
       </p>
       <div class="confirm-details" id="conf-details">
         <div id="conf-campers-list"></div>
@@ -1661,7 +1661,7 @@
         </div>
       </div>
       <div class="confirm-ref">
-        Confirmation # <strong id="conf-ref">â</strong>
+        Confirmation # <strong id="conf-ref">Ã¢ÂÂ</strong>
       </div>
       <div class="confirm-cta">
         <a href="tel:8705650388" class="btn-confirm-action btn-confirm-ghost">Questions? Call Us</a>
@@ -1801,27 +1801,26 @@
 
   // Submit contact to GHL
   function submitToGHL(data) {
-    // Build camper info string for GHL notes
-    var camperInfo = data.campers.map(function(c, i) {
-      return 'Camper ' + (i+1) + ': ' + c.name + ' (' + c.grade + ') - ' + c.session;
-    }).join(' | ');
-
-    fetch('https://backend.leadconnectorhq.com/forms/submit', {
+    // Post to GHL webhook
+    var webhookUrl = 'https://services.leadconnectorhq.com/hooks/duhoBROFzA4sXrQLyW8w/webhook-trigger/f722fb5e-cae3-40c4-ace2-63d384413f08';
+    
+    fetch(webhookUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        formId: GHL_FORM_ID,
-        locationId: GHL_LOCATION_ID,
-        formData: {
-          first_name: data.parentFirst,
-          last_name: data.parentLast,
-          email: data.email,
-          phone: data.phone
-        },
-        fieldsOriSequence: ['first_name', 'last_name', 'email', 'phone']
+        first_name: data.first_name || '',
+        last_name: data.last_name || '',
+        email: data.email || '',
+        phone: data.phone || ''
       })
-    }).catch(function() {
-      console.log('GHL submission attempted');
+    })
+    .then(function(response) {
+      console.log('GHL webhook response:', response.status);
+    })
+    .catch(function(error) {
+      console.error('GHL webhook error:', error);
     });
   }
 
@@ -1921,7 +1920,7 @@
     showConfirmationFromStorage();
   }
 
-  // STEP 1 ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ STEP 2
+  // STEP 1 ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ STEP 2
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -1997,7 +1996,7 @@
     document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // STEP 2 ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ BACK TO STEP 1
+  // STEP 2 ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ BACK TO STEP 1
   btnBack.addEventListener('click', function() {
     orderSummary.classList.remove('visible');
     form.style.display = '';
@@ -2005,7 +2004,7 @@
     document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // STEP 2 ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ STRIPE PAYMENT
+  // STEP 2 ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ STRIPE PAYMENT
   btnPay.addEventListener('click', function() {
     const payText = document.getElementById('pay-text');
     payText.innerHTML = '<span class="spinner"></span> Redirecting to payment...';
