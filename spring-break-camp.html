@@ -7,7 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: rder-box; }
 
   :root {
     --orange: #FF8C32;
@@ -1815,7 +1815,12 @@
           email: data.email || '',
           phone: data.phone || '',
           locationId: 'duhoBROFzA4sXrQLyW8w',
-          source: 'Spring Break Camp Form'
+          source: 'Spring Break Camp Form',
+          customFields: [
+            { key: "contact.camper_name", field_value: data.campers.map(function(c) { return c.name; }).join(", ") },
+            { key: "contact.camper_grade", field_value: data.campers.map(function(c) { return c.grade; }).join(", ") },
+            { key: "contact.session", field_value: data.campers.map(function(c) { return c.session; }).join(", ") }
+          ]
         })
       })
       .then(function(response) { return response.json(); })
