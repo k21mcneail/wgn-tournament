@@ -1817,9 +1817,9 @@
           locationId: 'duhoBROFzA4sXrQLyW8w',
           source: 'Spring Break Camp Form',
           customFields: [
-            { key: "contact.camper_name", field_value: data.campers.map(function(c) { return c.name; }).join(", ") },
-            { key: "contact.camper_grade", field_value: data.campers.map(function(c) { return c.grade; }).join(", ") },
-            { key: "contact.session", field_value: data.campers.map(function(c) { return c.session; }).join(", ") }
+            { id: "camper_name", field_value: data.campers.map(function(c) { return c.name; }).join(", ") },
+            { id: "camper_grade", field_value: data.campers.map(function(c) { return c.grade; }).join(", ") },
+            { id: "session", field_value: data.campers.map(function(c) { return c.session; }).join(", ") }
           ]
         })
       })
