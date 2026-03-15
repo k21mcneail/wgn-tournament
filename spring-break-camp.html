@@ -10,10 +10,10 @@
   * { margin: 0; padding: 0; box-sizing: rder-box; }
 
   :root {
-    --orange: #222222;
-    --orange-dark: #111111;
-    --orange-light: #444444;
-    --orange-glow: rgba(0,0,0,0.05);
+    --orange: #FF8C32;
+    --orange-dark: #FF6B00;
+    --orange-light: #FFB366;
+    --orange-glow: rgba(255,140,50,0.08);
     --bg: #ffffff;
     --surface: #f7f7f7;
     --surface-2: #f0f0f0;
@@ -22,7 +22,7 @@
     --text-muted: rgba(0,0,0,0.55);
     --text-dim: rgba(0,0,0,0.3);
     --border: rgba(0,0,0,0.1);
-    --border-hover: rgba(0,0,0,0.25);
+    --border-hover: rgba(255,140,50,0.3);
   }
 
   html { scroll-behavior: smooth; }
@@ -68,7 +68,7 @@
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 14px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    box-shadow: 0 0 20px rgba(255,140,50,0.25);
   }
 
   .nav-brand {
@@ -102,10 +102,10 @@
     font-size: 13px;
     font-weight: 600;
     transition: all 0.3s;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 16px rgba(255,140,50,0.3);
   }
 
-  .nav-cta:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.25); transform: translateY(-1px); }
+  .nav-cta:hover { box-shadow: 0 6px 24px rgba(255,140,50,0.4); transform: translateY(-1px); }
 
   /* ========== HERO ========== */
   .hero {
@@ -138,7 +138,7 @@
     right: -100px;
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(255,140,50,0.06) 0%, transparent 65%);
     pointer-events: none;
   }
 
@@ -417,7 +417,7 @@
     width: 48px;
     height: 48px;
     border-radius: 14px;
-    background: rgba(0,0,0,0.05);
+    background: rgba(255,140,50,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -470,7 +470,7 @@
   .schedule-badge {
     display: inline-flex;
     padding: 6px 16px;
-    background: rgba(0,0,0,0.05);
+    background: rgba(255,140,50,0.08);
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 100px;
     font-size: 11px;
@@ -736,7 +736,7 @@
     outline: none;
     border-color: var(--orange);
     background: rgba(0,0,0,0.03);
-    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+    box-shadow: 0 0 0 3px rgba(255,140,50,0.15);
   }
 
   .form-group select {
@@ -1591,10 +1591,10 @@
       <div class="form-group full">
         <label for="num-campers">Number of Campers *</label>
         <select id="num-campers" name="num_campers" required>
-          <option value="1">1 Camper ÃÂ¢ÃÂÃÂ $65</option>
-          <option value="2">2 Campers ÃÂ¢ÃÂÃÂ $120.25 (15% off 2nd)</option>
-          <option value="3">3 Campers ÃÂ¢ÃÂÃÂ $175.50 (15% off 2nd & 3rd)</option>
-          <option value="4">4 Campers ÃÂ¢ÃÂÃÂ $230.75 (15% off 2nd, 3rd & 4th)</option>
+          <option value="1">1 Camper ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $65</option>
+          <option value="2">2 Campers ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $120.25 (15% off 2nd)</option>
+          <option value="3">3 Campers ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $175.50 (15% off 2nd & 3rd)</option>
+          <option value="4">4 Campers ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $230.75 (15% off 2nd, 3rd & 4th)</option>
         </select>
         <span style="font-size:12px;color:#22c55e;margin-top:6px;font-weight:500;">Sibling discount: 15% off each additional camper! Each camper can be in a different session.</span>
       </div>
@@ -1610,11 +1610,11 @@
       <div class="order-title">Order Summary</div>
       <div class="order-row">
         <span class="order-label">Parent/Guardian</span>
-        <span class="order-value" id="sum-parent">ÃÂ¢ÃÂÃÂ</span>
+        <span class="order-value" id="sum-parent">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</span>
       </div>
       <div class="order-row">
         <span class="order-label">Email</span>
-        <span class="order-value" id="sum-email">ÃÂ¢ÃÂÃÂ</span>
+        <span class="order-value" id="sum-email">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</span>
       </div>
       <div class="order-row">
         <span class="order-label">Dates</span>
@@ -1623,7 +1623,7 @@
       <div id="sum-campers-list"></div>
       <div class="order-row" id="sum-discount-row" style="display:none;">
         <span class="order-label">Sibling Discount (15% off additional)</span>
-        <span class="order-value" id="sum-discount" style="color:#22c55e;">ÃÂ¢ÃÂÃÂ</span>
+        <span class="order-value" id="sum-discount" style="color:#22c55e;">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</span>
       </div>
       <div class="order-total">
         <span class="order-label">Total</span>
@@ -1643,7 +1643,7 @@
       <div class="confirm-icon">&#10003;</div>
       <div class="confirm-title">You're Registered!</div>
       <p class="confirm-message">
-        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">ÃÂ¢ÃÂÃÂ</strong>.
+        Thank you for signing up for IGN Academy's Spring Break Basketball Camp. A confirmation email has been sent to <strong id="conf-email">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</strong>.
       </p>
       <div class="confirm-details" id="conf-details">
         <div id="conf-campers-list"></div>
@@ -1661,7 +1661,7 @@
         </div>
       </div>
       <div class="confirm-ref">
-        Confirmation # <strong id="conf-ref">ÃÂ¢ÃÂÃÂ</strong>
+        Confirmation # <strong id="conf-ref">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</strong>
       </div>
       <div class="confirm-cta">
         <a href="tel:8705650388" class="btn-confirm-action btn-confirm-ghost">Questions? Call Us</a>
